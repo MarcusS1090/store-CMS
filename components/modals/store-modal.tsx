@@ -1,7 +1,10 @@
 "use client";
 import * as z from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { Modal } from "@/components/ui/modal";
@@ -22,8 +25,12 @@ const formSchema = z.object({
 });
 
 export const StoreModal = () => {
-    
     const storeModal = useStoreModal();
+
+    /* The line `const [loading, setLoading] = useState(false);` is using the `useState` hook from
+    React to create a state variable called `loading` and a corresponding setter function called
+    `setLoading`. */
+    const [loading, setLoading] = useState(false);
 
     /* The code `const form = useForm<z.infer<typeof formSchema>>({ resolver: zodResolver(formSchema),
     defaultValues: { name: "", }, });` is creating a form using the `useForm` hook from the
@@ -35,12 +42,35 @@ export const StoreModal = () => {
         },
     });
 
+    
+    
+    
+    /**
+     * The `onSubmit` function is responsible for handling the submission of form data, making a POST
+     * request to the `/api/stores` endpoint, and logging the response data.
+     * @param values - The `values` parameter is an object that represents the form data that will be
+     * submitted. It is inferred from the `formSchema` using the `z.infer` function.
+     */
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
-        //create store
-    }
+        /* The code block is handling the submission of the form data. */
+        try {
+            setLoading(true);
+            const response = await axios.post('/api/stores', values);
+            toast.success('Store created.');
+
+            console.log(response.data);
+            
+        } catch (error) {
+            toast.error("Something went wrong.");
+            
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
+    /* The code you provided is rendering a modal component with a form inside it. Here's a breakdown
+    of what each part does: */
     <Modal
         title="Create store"
         description="Add a new Store to manage products and categories"
@@ -62,7 +92,8 @@ export const StoreModal = () => {
                                         Name
                                     </FormLabel>
                                     <FormControl>
-                                        <Input 
+                                        <Input
+                                            disabled={loading}
                                             placeholder="E-commerce name"
                                             {...field}
                                         />
@@ -81,13 +112,19 @@ export const StoreModal = () => {
                                 w-full
                             "
                         >
-                            <Button 
+                            <Button
+                                disabled={loading}
                                 variant="outline"
                                 onClick={storeModal.onClose}
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit">Continue</Button>
+                            <Button 
+                                disabled={loading}
+                                type="submit"
+                            >
+                                Continue
+                            </Button>
                         </div>
                     </form>
                 </Form>
