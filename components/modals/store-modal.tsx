@@ -55,11 +55,19 @@ export const StoreModal = () => {
         /* The code block is handling the submission of the form data. */
         try {
             setLoading(true);
-            const response = await axios.post('/api/stores', values);
-            toast.success('Store created.');
 
-            console.log(response.data);
-            
+            /* The line `const response = await axios.post('/api/stores', values);` is making a POST
+            request to the `/api/stores` endpoint with the `values` object as the request payload.
+            The `axios.post` function is a part of the Axios library, which is used to send HTTP
+            requests. */
+            const response = await axios.post('/api/stores', values);
+
+            /* `window.location.assign(`/${response.data.id}`);` is used to redirect the user to a new
+            URL. In this case, it is redirecting the user to a URL that includes the `id` property
+            from the `response.data` object. The `response.data` object is the data returned from
+            the POST request to the `/api/stores` endpoint. */
+            window.location.assign(`/${response.data.id}`);
+
         } catch (error) {
             toast.error("Something went wrong.");
             
