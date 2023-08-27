@@ -12,7 +12,7 @@ export default async function DashboardLayout({
     /* The `children` prop is used to render the content inside the `DashboardLayout` component. It is
     of type `React.ReactNode`, which means it can accept any valid React component or JSX element as
     its value. */
-    children: React.ReactNode
+    children: React.ReactNode;
     params: {
         storeId: string
     }

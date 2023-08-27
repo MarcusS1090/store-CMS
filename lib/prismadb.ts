@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
+
 /* The `declare global` block is used to declare a global variable `prisma` with the type `PrismaClient
 | undefined`. */
 declare global {
