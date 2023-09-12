@@ -59,7 +59,7 @@ export async function PATCH(
 
         /* The code `const store = await prismadb.store.updateMany({ ... })` is updating a store's name
         in the database using the `prismadb` library. */
-        const store = await prismadb.store.updateMany({
+        const Store = await prismadb.store.update({
             where: {
                 id: params.storeId,
                 userId
@@ -71,7 +71,7 @@ export async function PATCH(
 
         /* `return NextResponse.json(store);` is returning a JSON response with the `store` object as
         the response body. */
-        return NextResponse.json(store);
+        return NextResponse.json(Store);
 
     } /* The `catch` block is used to handle any errors that occur within the `try` block. If an error
     occurs, it will be caught and the code within the `catch` block will be executed. */

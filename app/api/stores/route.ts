@@ -17,6 +17,8 @@ import prismadb from "@/lib/prismadb";
 export async function POST(
     req:Request,
 ) {
+    /* The code block you provided is handling a POST request to create a new store. Here's a breakdown
+    of what it does: */
     try {
         const { userId } = auth();
         const body = await req.json();
