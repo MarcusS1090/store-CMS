@@ -182,7 +182,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 
         /* The above code is using the `router` object to navigate to the root route, which is
         represented by `'/'`. */
-        router.push('/');
+        router.push(`/${params.storeId}/billboards`);
 
         toast.success('Billboard deleted.');
 
@@ -270,7 +270,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                 </Button>
             </form>
         </Form>
-        <Separator />
     </>
     );
 };

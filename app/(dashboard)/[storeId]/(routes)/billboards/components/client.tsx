@@ -1,14 +1,25 @@
 "use client";
 
+//global import
 import { PlusIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 
+import { BillboardColumn, columns } from "./columns";
+import { DataTable } from "@/components/ui/data-table";
+import { ApiList } from "@/components/ui/api-list";
 
-export const BillboardClient = () => {
+interface BillboardClientProps {
+    /* The `data: BillboardColumn[]` is defining a prop named `data` for the `BillboardClient`
+    component. The prop `data` is expected to be an array of `BillboardColumn` objects. */
+    data: BillboardColumn[]
+}
+
+export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
     /* The line `const router = useRouter();` is importing the `useRouter` hook from the
     `next/navigation` module and assigning it to the `router` constant. */
     const router = useRouter();
@@ -21,7 +32,7 @@ export const BillboardClient = () => {
         <>
             <div className="flex items-center justify-between">
                 <Heading 
-                    title="Billboards(0)"
+                    title={`Billboards(${data.length})`}
                     description="Manage your billboards for your store"
                 />
                 <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
@@ -30,6 +41,17 @@ export const BillboardClient = () => {
                 </Button>
             </div>
             <Separator />
+            <DataTable
+                columns={columns}
+                data={data}
+                searchKey="label"
+            />
+            <Heading 
+                title="API"
+                description="API calls for Billboards"
+            />
+            <Separator />
+            <ApiList entityName="billboards" entityIdName="billboardId"/>
         </>
     )
 }
