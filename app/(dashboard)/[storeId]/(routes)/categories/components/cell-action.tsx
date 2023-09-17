@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-import { BillboardColumn } from "./columns";
+import { CategoryColumn } from "./columns";
 import {
     Copy,
     Edit,
@@ -24,7 +24,7 @@ import { useState } from "react";
 import { AlertModal } from "@/components/modals/alert-modal";
 
 interface CellActionProps {
-    data: BillboardColumn
+    data: CategoryColumn
 }
 
 export const CellAction: React.FC<CellActionProps>  = ( {
@@ -57,40 +57,27 @@ export const CellAction: React.FC<CellActionProps>  = ( {
      */
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success('Billboard ID copied to clipboard.');
+        toast.success('Category ID copied to clipboard.');
     }
 
     const onDelete = async () => {
         try {
-            /* `setLoading(true);` is setting the value of the `loading` state variable to `true`. This is
-            typically used to indicate that a loading state is active, such as when a form is being
-            submitted or an API request is being made. By setting `loading` to `true`, it can trigger UI
-            changes, such as disabling buttons or showing a loading spinner, to provide feedback to the
-            user that an operation is in progress. */
+
             setLoading(true);
     
-            
-            /* The line `await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);` is making
-            a DELETE request to the specified API endpoint. The endpoint is constructed using
-            template literals to include the `storeId` and `data.id` values. The `axios.delete`
-            function is an HTTP client that sends the DELETE request to the specified URL. The
-            `await` keyword is used to wait for the response from the server before proceeding with
-            the next line of code. */
-            await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+            await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
     
             /* The above code is refreshing the router. */
             router.refresh();
 
     
-            toast.success('Billboard deleted.');
+            toast.success('Category deleted.');
     
         } 
-        /* The above code is a catch block in a TypeScript React application. It is catching any error
-        that occurs and displaying an error message using the toast.error() function. The error
-        message being displayed is "Make sure you removed all categories using this billboard." */
+
         catch (error: any) {
     
-            toast.error('Make sure you removed all categories using this billboard.');
+            toast.error('Make sure you removed all products using this category first.');
     
         } finally {
     
@@ -101,6 +88,20 @@ export const CellAction: React.FC<CellActionProps>  = ( {
             setOpen(false);
         }
         }
+
+    const onConfirm = async () => {
+        try {
+            setLoading(true);
+            await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
+            toast.success('Category deleted.');
+            router.refresh();
+        } catch (error) {
+            toast.error('Make sure you removed all products using this category first.');
+        } finally {
+            setOpen(false);
+            setLoading(false);
+            }
+    };
 
     return ( 
         <>
@@ -131,12 +132,14 @@ export const CellAction: React.FC<CellActionProps>  = ( {
                         Copy Id
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem onClick={() =>router.push(`/${params.storeId}/billboards/${data.id}`)}>
+                    <DropdownMenuItem 
+                        onClick={() =>router.push(`/${params.storeId}/categories/${data.id}`)}>
                         <Edit className="mr-2 h-4 w-4" /> 
                         Update
                     </DropdownMenuItem>
                 
-                    <DropdownMenuItem onClick={() => setOpen(true)}>
+                    <DropdownMenuItem 
+                        onClick={() => setOpen(true)}>
                         <Trash className="mr-2 h-4 w-4" /> 
                         Delete
                     </DropdownMenuItem>
@@ -145,4 +148,4 @@ export const CellAction: React.FC<CellActionProps>  = ( {
             </DropdownMenu>
         </>
     );
-}
+};
