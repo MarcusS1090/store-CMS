@@ -84,6 +84,7 @@ model Product {
   store           Store       @relation("StoreToProduct", fields: [storeId], references: [id])
   categoryId      String
   category        Category    @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  supplier        String
   name            String
   price           Decimal
   isFeatured      Boolean     @default(false)
