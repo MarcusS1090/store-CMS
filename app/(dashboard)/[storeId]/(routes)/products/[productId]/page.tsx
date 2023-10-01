@@ -1,34 +1,52 @@
 import prismadb from "@/lib/prismadb";
-import { BillboardForm } from "./components/billboards-form";
+import { ProductForm } from "./components/products-form";
 
-/* The code is defining an asynchronous function called `BillboardPage` that takes in an object with a
-`params` property. The `params` property is expected to have a `billboardId` property of type
-string. */
-const BillboardPage = async({
+const ProductPage = async({
     params
 }: {
-    params: { billboardId: string }
+    params: { productId: string, storeId: string }
 }) => {
-    /* The code is using the `prismadb` library to query the database for a unique billboard record. It
-    is using the `findUnique` method of the `billboard` object and passing in a `where` object with
-    the condition that the `id` property matches the `billboardId` value from the `params` object.
-    The result of the query is stored in the `billboard` variable. */
-    const billboard = await prismadb.billboard.findUnique({
+
+    const product = await prismadb.product.findUnique({
         where: {
-            id: params.billboardId
-        }
+            id: params.productId
+        },
+        include: {
+            images: true,
+        },
     });
+
+    const categories = await prismadb.category.findMany({
+        where: {
+            storeId: params.storeId
+        },
+    })
+
+    const sizes = await prismadb.size.findMany({
+        where: {
+            storeId: params.storeId
+        },
+    })
+
+    const colors = await prismadb.color.findMany({
+        where: {
+            storeId: params.storeId
+        },
+    })
 
 
     return ( 
         <div className="flex-col">
             <div className="flex-1 space-y-4 p-8 pt-6">
-                <BillboardForm 
-                    initialData={billboard}
+                <ProductForm
+                    categories={categories}
+                    colors={colors}
+                    sizes={sizes}
+                    initialData={product}
                 />
             </div>
         </div>
     );
 }
 
-export default BillboardPage;
+export default ProductPage;
