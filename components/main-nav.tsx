@@ -5,7 +5,6 @@ import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-
 /* The code is exporting a function called `MainNav` that takes in an object as its parameter. The
 object can have a property called `className` of type `string`, and any other properties of type
 `React.HTMLAttributes<HTMLElement>`. The function returns a JSX element, specifically a `<div>`
@@ -80,7 +79,6 @@ export function MainNav({
         */
         <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)}
         >
-        
             {routes.map((route) => (
                 <Link
                     key={route.href}

@@ -31,7 +31,7 @@ export default function RootLayout({
     management functionality to the application. It sets up the necessary context and hooks for
     interacting with the Clerk authentication system. */
     <ClerkProvider>
-      <html lang="es-en">
+      <html lang="es">
         <body className={inter.className}>
           <ToasterProvider />
           <ModalProvider />
