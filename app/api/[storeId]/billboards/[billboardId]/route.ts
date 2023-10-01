@@ -112,7 +112,7 @@ export async function PATCH(
 
         /* The code `const billboard = await prismadb.billboard.update({ ... })` is updating a
         billboard object in the database. */
-        const billboard = await prismadb.billboard.update({
+        const billboard = await prismadb.billboard.updateMany({
             where: {
                 id: params.billboardId,
                 

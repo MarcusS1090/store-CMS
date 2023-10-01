@@ -49,8 +49,7 @@ const formSchema = z.object({
     colorId: z.string().min(1),
     sizeId: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
-    isArchived: z.boolean().default(false).optional(),
-    
+    isArchived: z.boolean().default(false).optional()
 });
 
 type ProductFormValues = z.infer<typeof formSchema>
@@ -85,11 +84,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     const action = initialData ? "Save changes" : "Create";
 
 
-    const form = useForm<ProductFormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: initialData ? {
+    const defaultValues = initialData ? {
         ...initialData,
-        price: parseFloat(String(initialData?.price))
+        price: parseFloat(String(initialData?.price)),
     } : {
         name: '',
         images: [],
@@ -100,6 +97,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         isFeatured: false,
         isArchived: false,
     }
+    
+    const form = useForm<ProductFormValues>({
+        resolver: zodResolver(formSchema),
+        defaultValues
     });
 
 
@@ -109,11 +110,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
 
         if (initialData) {
-
             await axios.patch(`/api/${params.storeId}/products/${params.productId}`, data);
-        
         } else {
-
             await axios.post(`/api/${params.storeId}/products`, data);
         }
 
@@ -201,7 +199,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                             value={field.value.map((image) =>image.url)}
                             disabled={loading}
                             onChange={(url) => field.onChange([...field.value, { url }])}
-                            onRemove={(url) => field.onChange([...field.value.filter((current) => current.url !==url)])}
+                            onRemove={(url) => field.onChange([...field.value.filter((current) => current.url !== url)])}
 
                         />
                         </FormControl>
@@ -209,7 +207,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     </FormItem>
                     )}
                 />
-                <div className="grid  cols-3 gap-9">
+                <div className="md:grid md:grid-cols-3 gap-8">
                 <FormField
                     control={form.control}
                     name="name"
@@ -230,7 +228,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     <FormItem>
                         <FormLabel>Price</FormLabel>
                         <FormControl>
-                        <Input type="number" disabled={loading} placeholder="$10000" {...field} />
+                        <Input type="number" disabled={loading} placeholder="$1000" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
