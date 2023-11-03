@@ -10,6 +10,9 @@ import {  Color } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/css";
+
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,6 +26,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Heading } from "@/components/ui/heading"
 import { AlertModal } from "@/components/modals/alert-modal"
+import { Label } from "@/components/ui/label"
 
 const formSchema = z.object({
     name: z.string().min(1),
@@ -42,6 +46,8 @@ interface ColorFormProps {
 export const ColorForm: React.FC<ColorFormProps> = ({
     initialData
 }) => {
+
+    const [color, setColor] = useColor("purple"); 
 
     const params = useParams();
 
@@ -190,10 +196,13 @@ export const ColorForm: React.FC<ColorFormProps> = ({
                                 <div
                                     className="border p-4 rounded-full"
                                     style={{backgroundColor: field.value}}
+                                    title="xd"
                                 />
                             </div>
                         </FormControl>
                         <FormMessage />
+                        <FormLabel>use this to copy the hex code</FormLabel>
+                        <ColorPicker height={320} color={color} onChange={setColor} hideInput={["rgb", "hsv"]}/>
                     </FormItem>
                     )}
                 />

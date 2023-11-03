@@ -1,6 +1,6 @@
 "use client"
 
-import { store } from "@prisma/client";
+import { Store } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useStoreModal } from "@/hooks/use-store-modal";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronsUpDown, PlusCircle, Store, StoreIcon} from "lucide-react";
+import { Check, ChevronsUpDown, PlusCircle, StoreIcon} from "lucide-react";
 import {
     Command,
     CommandEmpty,
@@ -25,7 +25,7 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<typeof PopoverTrigger>
 inherits all the properties and types defined in `PopoverTriggerProps`. Additionally, it adds a new
 property `items` of type `store[]`. */
 interface StoreSwitcherProps extends PopoverTriggerProps {
-    items: store[];
+    items: Store[];
 
 };
 
@@ -95,7 +95,7 @@ package to access the parameters from the current route. */
                     aria-label="Select Store"
                     className={cn("w-[200px] justify-between", className)}
                 >
-                    <Store className="mr-2 h-4 w-4"/>
+                    <StoreIcon className="mr-2 h-4 w-4"/>
                     {currentStore?.label}
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50"/>
                 </Button>
