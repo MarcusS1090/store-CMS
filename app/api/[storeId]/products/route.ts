@@ -21,6 +21,7 @@ export async function POST(
         const {
             name,
             supplier,
+            quantity,
             price,
             categoryId,
             colorId,
@@ -36,6 +37,9 @@ export async function POST(
 
         if (!price) {
             return new NextResponse("Price is required", {status: 400 });
+        }
+        if (!quantity) {
+            return new NextResponse("Quantity is required, almost 1", {status: 400 });
         }
 
         if (!name) {
@@ -76,6 +80,7 @@ export async function POST(
         const product = await prismadb.product.create({
             data: {
                 name,
+                quantity,
                 supplier,
                 price,
                 isFeatured,
@@ -93,7 +98,6 @@ export async function POST(
                 },
             },
         });
-
         return NextResponse.json(product);
         
     } catch (error) {
@@ -150,4 +154,3 @@ export async function GET(
         
     }
 }
-//BILlBOARD

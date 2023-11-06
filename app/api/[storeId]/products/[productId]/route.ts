@@ -2,7 +2,45 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
+export async function POST( 
 
+    req:Request,
+    { params}: { params : {productId: string}}
+
+    ) {
+    try {
+        const product = await prismadb.product.findUnique({
+            where: {
+                id: params.productId,
+            },
+            include: {
+                images: true,
+                category: true,
+                size: true,
+                color:true,
+            }
+        });
+
+        if (!product) {
+            return new NextResponse("Product not found", {status:400});
+        }
+
+        await prismadb.product.update({
+            where: {
+                id: params.productId
+            },
+            data: {
+                quantity: product.quantity-1,
+            },
+        });
+
+        return NextResponse.json(product);
+
+    } catch (error) {
+        console.log('[PRODUCT_GET]',error);
+        return new NextResponse("Internal error", { status: 500 });
+    }
+}
 export async function GET (
 
     req:Request,
@@ -52,6 +90,7 @@ export async function PATCH(
         const {
             name,
             supplier,
+            quantity,
             price,
             categoryId,
             colorId,
@@ -67,6 +106,10 @@ export async function PATCH(
 
         if (!price) {
             return new NextResponse("Price is required", {status: 400 });
+        }
+
+        if (!quantity) {
+            return new NextResponse("Quantity is required", {status: 400 });
         }
 
         if (!name) {
@@ -113,6 +156,7 @@ export async function PATCH(
             data: {
                 name,
                 supplier,
+                quantity,
                 price,
                 categoryId,
                 colorId,
