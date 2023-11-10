@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { MainNav } from "@/components/main-nav"
 import StoreSwitcher from "@/components/store-switcher"
+import { ThemeToggle } from "./theme-toggle";
 
 /**
  * The `Navbar` function is a TypeScript React component that renders a navigation bar, checks if the
@@ -44,6 +45,7 @@ export const Navbar = async () => {
                 <StoreSwitcher items={store} />
                 <MainNav className="mx-6" />
                 <div className="ml-auto flex items-center space-x-4">
+                    <ThemeToggle />
                     <UserButton afterSignOutUrl="/" />
                 </div>
             </div>
