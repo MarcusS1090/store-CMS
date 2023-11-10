@@ -118,6 +118,7 @@ export async function GET(
         const categoryId = searchParams.get('categoryId') || undefined;
         const colorId = searchParams.get('colorId') || undefined;
         const sizeId = searchParams.get('sizeId') || undefined;
+        const searchValue = decodeURIComponent(searchParams.get('searchValue') || "") || undefined;
         const isFeatured = searchParams.get('isFeatured');
 
         if (!params.storeId) {
@@ -130,6 +131,9 @@ export async function GET(
                 categoryId,
                 colorId,
                 sizeId,
+                name: {
+                    contains: searchValue
+                },
                 isFeatured: isFeatured ? true : undefined,
                 isArchived: false
             },
