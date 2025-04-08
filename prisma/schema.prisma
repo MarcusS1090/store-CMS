@@ -3,12 +3,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextIndex", "fullTextSearch"]
 }
 
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
-  relationMode = "prisma"
+  
 }
 
 model Store {
