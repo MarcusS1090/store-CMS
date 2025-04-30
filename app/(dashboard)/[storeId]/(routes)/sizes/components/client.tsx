@@ -28,11 +28,11 @@ export const SizesClient: React.FC<SizesClientProps> = ({ data }) => {
             <div className="flex items-center justify-between">
                 <Heading 
                     title={`Sizes (${data.length})`}
-                    description="Manage your sizes for your store"
+                    description="Administra los tamaños de tus productos"
                 />
                 <Button onClick={() => router.push(`/${params.storeId}/sizes/new`)}>
                     <PlusIcon className="mr-2 h-4 w-4"/>
-                    Add New
+                    Añadir tamaño
                 </Button>
             </div>
             <Separator />
@@ -43,7 +43,7 @@ export const SizesClient: React.FC<SizesClientProps> = ({ data }) => {
             />
             <Heading 
                 title="API"
-                description="API calls for Sizes"
+                description="Llama a esta API desde tu app para gestionar tamaños"
             />
             <Separator />
             <ApiList entityName="sizes" entityIdName="sizeId"/>

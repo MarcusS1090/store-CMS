@@ -28,7 +28,7 @@ export const columns: ColumnDef<SizeColumn>[] = [
                     variant= "ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Name
+                    Nombre
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -36,11 +36,11 @@ export const columns: ColumnDef<SizeColumn>[] = [
     },
     {
         accessorKey: "value",
-        header: "Value",
+        header: "Valor",
     },
     {
         accessorKey: "createdAt",
-        header: "Date",
+        header: "Fecha",
     },
 
     {
