@@ -27,12 +27,12 @@ export const CategoriesClient: React.FC<CategoriesClientProps> = ({ data }) => {
         <>
             <div className="flex items-center justify-between">
                 <Heading 
-                    title={`Categories(${data.length})`}
-                    description="Manage your Categories for your store"
+                    title={`Categorias(${data.length})`}
+                    description="Administra las categorias de tus productos"
                 />
                 <Button onClick={() => router.push(`/${params.storeId}/categories/new`)}>
                     <PlusIcon className="mr-2 h-4 w-4"/>
-                    Add New
+                    Añadir categoria
                 </Button>
             </div>
             <Separator />
@@ -43,7 +43,7 @@ export const CategoriesClient: React.FC<CategoriesClientProps> = ({ data }) => {
             />
             <Heading 
                 title="API"
-                description="API calls for Categories"
+                description="LLama a esta API desde tu app para gestionar categorias"
             />
             <Separator />
             <ApiList entityName="categories" entityIdName="categoryId"/>

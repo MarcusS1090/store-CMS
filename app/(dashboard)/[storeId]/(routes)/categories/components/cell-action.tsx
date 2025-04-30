@@ -57,7 +57,7 @@ export const CellAction: React.FC<CellActionProps>  = ( {
      */
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success('Category ID copied to clipboard.');
+        toast.success('ID de la categoria copiado en el portapapeles.');
     }
 
     const onDelete = async () => {
@@ -71,13 +71,13 @@ export const CellAction: React.FC<CellActionProps>  = ( {
             router.refresh();
 
     
-            toast.success('Category deleted.');
+            toast.success('Categoria eliminada.');
     
         } 
 
         catch (error: any) {
     
-            toast.error('Make sure you removed all products using this category first.');
+            toast.error('Asegúrate de haber eliminado todos los productos que usan esta categoria primero.');
     
         } finally {
     
@@ -93,10 +93,10 @@ export const CellAction: React.FC<CellActionProps>  = ( {
         try {
             setLoading(true);
             await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
-            toast.success('Category deleted.');
+            toast.success('Categoria eliminada.');
             router.refresh();
         } catch (error) {
-            toast.error('Make sure you removed all products using this category first.');
+            toast.error('Asegurate de haber eliminado todos los productos que usan esta categoria primero.');
         } finally {
             setOpen(false);
             setLoading(false);
@@ -115,33 +115,33 @@ export const CellAction: React.FC<CellActionProps>  = ( {
                 
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
+                        <span className="sr-only">Abrir menu</span>
                         <MoreHorizontal className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>
-                        Actions
+                        Acciones
                     </DropdownMenuLabel>
                     
                     <DropdownMenuItem
                         onClick={() => onCopy(data.id)}
                     >
                         <Copy className="mr-2 h-4 w-4" /> 
-                        Copy Id
+                        Copiar ID
                     </DropdownMenuItem>
 
                     <DropdownMenuItem 
                         onClick={() =>router.push(`/${params.storeId}/categories/${data.id}`)}>
                         <Edit className="mr-2 h-4 w-4" /> 
-                        Update
+                        Actualizar
                     </DropdownMenuItem>
                 
                     <DropdownMenuItem 
                         onClick={() => setOpen(true)}>
                         <Trash className="mr-2 h-4 w-4" /> 
-                        Delete
+                        Borrar
                     </DropdownMenuItem>
 
                 </DropdownMenuContent>
