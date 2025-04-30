@@ -80,8 +80,8 @@ export const StoreModal = () => {
     /* The code you provided is rendering a modal component with a form inside it. Here's a breakdown
     of what each part does: */
     <Modal
-        title="Create store"
-        description="Add a new Store to manage products and categories"
+        title="Crear tienda"
+        description="Añade una nueva tienda con categorias, productos, y más."
         isOpen={storeModal.isOpen}
         onClose={storeModal.onClose}
     >
@@ -97,12 +97,12 @@ export const StoreModal = () => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
-                                        Name
+                                        Nombre
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             disabled={loading}
-                                            placeholder="E-commerce name"
+                                            placeholder="Nombre de la tienda"
                                             {...field}
                                         />
                                     </FormControl>
@@ -125,13 +125,13 @@ export const StoreModal = () => {
                                 variant="outline"
                                 onClick={storeModal.onClose}
                             >
-                                Cancel
+                                Cancelar
                             </Button>
                             <Button 
                                 disabled={loading}
                                 type="submit"
                             >
-                                Continue
+                                Continuar
                             </Button>
                         </div>
                     </form>

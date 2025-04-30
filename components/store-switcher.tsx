@@ -103,11 +103,11 @@ package to access the parameters from the current route. */
             <PopoverContent className="w-[200px] p-0">
                 <Command>
                     <CommandList>
-                        <CommandInput placeholder="Search Store..." />
+                        <CommandInput placeholder="Buscar tienda..." />
                         <CommandEmpty>
-                            Not store found.
+                            Tienda no encontrada.
                         </CommandEmpty>
-                        <CommandGroup heading="Stores">
+                        <CommandGroup heading="Tiendas">
                             {formattedItems.map((store) => (
                                 <CommandItem
                                     key={store.value}
@@ -138,7 +138,7 @@ package to access the parameters from the current route. */
                                 }}
                             >
                                 <PlusCircle className="mr-2 h-5 w-5 cursor-pointer" />
-                                Create store
+                                Crear tienda
                             </CommandItem>
                         </CommandGroup>
                     </CommandList>

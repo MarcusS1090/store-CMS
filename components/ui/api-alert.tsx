@@ -13,8 +13,8 @@ interface ApiAlertProps {
 
 
 const textMap: Record<ApiAlertProps["variant"], string> = {
-    public: 'Public',
-    admin: 'Admin'
+    public: 'Publico',
+    admin: 'Administrador'
 };
 
 const variantMap: Record<ApiAlertProps["variant"], BadgeProps["variant"]> = {
@@ -29,7 +29,7 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
 }) => {
     const onCopy = (description: string) => {
         navigator.clipboard.writeText(description);
-        toast.success('API Route copied to clipboard.');
+        toast.success('API copiada en el portapapeles.');
     }
 
     return ( 
