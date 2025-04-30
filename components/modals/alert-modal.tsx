@@ -46,8 +46,8 @@ export const AlertModal:  React.FC<AlertModalProps> = ({
     and two `Button` components for canceling or continuing an action. */
     return (
         <Modal
-            title="Are you sure?"
-            description="this action cannot be undone."
+            title="Estas seguro que deseas eliminar este elemento?"
+            description="Esta acción no se puede deshacer."
             isOpen={isOpen}
             onClose={onClose}
         >

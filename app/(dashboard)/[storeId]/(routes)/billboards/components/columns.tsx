@@ -34,7 +34,7 @@ export const columns: ColumnDef<BillboardColumn>[] = [
                     variant= "ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Label
+                    Etiqueta
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -46,7 +46,7 @@ export const columns: ColumnDef<BillboardColumn>[] = [
         }` is defining a column for a billboard. */
     {
         accessorKey: "createdAt",
-        header: "Date",
+        header: "Fecha",
     },
     /* The code block `{
             id: "actions",
