@@ -12,7 +12,6 @@ export default function AuthLayout ({
                     items-center
                     justify-center
                     h-full w-full
-                    bg-black
                 "
             >
             {children}

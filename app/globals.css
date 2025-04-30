@@ -82,3 +82,30 @@ body,
     @apply bg-background text-foreground;
   }
 }
+.cl-formFieldInput {
+  background-color: #011b44;
+  color: #ffffff;
+  border-color: #004cc4;
+}
+
+.cl-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  background-color: #0d2d5f;
+}
+
+.cl-socialButtonsIconButton {
+  border-color: #004cc4;
+}
+
+.cl-socialButtonsIconButton:hover,
+.cl-socialButtonsIconButton:focus,
+.cl-socialButtonsIconButton:active {
+  background-color: #004cc4;
+  color: #ffffff;
+}
+
+.cl-formButtonPrimary {
+  font-size: 14px;
+  text-transform: none;
+}
+
