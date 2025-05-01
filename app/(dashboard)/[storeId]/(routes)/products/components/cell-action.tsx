@@ -54,13 +54,13 @@ export const CellAction: React.FC<CellActionProps>  = ( {
             router.refresh();
 
     
-            toast.success('Product deleted.');
+            toast.success('Producto eliminado.');
     
         } 
 
         catch (error: any) {
     
-            toast.error('Something went wrong.');
+            toast.error('Algo salió mal.');
     
         } finally {
 
@@ -82,31 +82,31 @@ export const CellAction: React.FC<CellActionProps>  = ( {
                 
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
+                        <span className="sr-only">Abrir menu</span>
                         <MoreHorizontal className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>
-                        Actions
+                        Acciones
                     </DropdownMenuLabel>
                     
                     <DropdownMenuItem
                         onClick={() => onCopy(data.id)}
                     >
                         <Copy className="mr-2 h-4 w-4" /> 
-                        Copy Id
+                        Copiar ID
                     </DropdownMenuItem>
 
                     <DropdownMenuItem onClick={() =>router.push(`/${params.storeId}/products/${data.id}`)}>
                         <Edit className="mr-2 h-4 w-4" /> 
-                        Update
+                        Actualizar
                     </DropdownMenuItem>
                 
                     <DropdownMenuItem onClick={() => setOpen(true)}>
                         <Trash className="mr-2 h-4 w-4" /> 
-                        Delete
+                        Eliminar
                     </DropdownMenuItem>
 
                 </DropdownMenuContent>

@@ -80,10 +80,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
     const [loading, setLoading] = useState(false);
 
-    const title = initialData ? "Edit Product" : "Create product";
-    const description = initialData ? "Edit a Product" : "Add new product";
-    const toastMessage = initialData ? "Product updated" : "Product created.";
-    const action = initialData ? "Save changes" : "Create";
+    const title = initialData ? "Editar Producto" : "Crear producto";
+    const description = initialData ? "Editar Producto" : "Añadir un nuevo producto";
+    const toastMessage = initialData ? "Producto actualizado" : "Producto creado.";
+    const action = initialData ? "Guardar cambios" : "Creado";
 
 
     const defaultValues = initialData ? {
@@ -129,7 +129,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
     catch (error: any) {
 
-        toast.error('Something went wrong.');
+        toast.error('Algo salió mal.');
 
     } finally {
 
@@ -149,13 +149,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
         router.push(`/${params.storeId}/products`);
 
-        toast.success('Product deleted.');
+        toast.success('Producto eliminado.');
 
     } 
 
     catch (error: any) {
 
-        toast.error('Something went wrong');
+        toast.error('Algo salió mal.');
 
     } finally {
 
@@ -197,7 +197,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="images"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Images</FormLabel>
+                        <FormLabel>Imagenes</FormLabel>
                         <FormControl>
                         <ImageUpload 
                             value={field.value.map((image) =>image.url)}
@@ -217,9 +217,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="name"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>Nombre</FormLabel>
                         <FormControl>
-                        <Input disabled={loading} placeholder="Product Name" {...field} />
+                        <Input disabled={loading} placeholder="Nombre del producto" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -230,9 +230,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="supplier"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Supplier</FormLabel>
+                        <FormLabel>Proovedor</FormLabel>
                         <FormControl>
-                        <Input  disabled={loading} placeholder="Product supplier" {...field} />
+                        <Input  disabled={loading} placeholder="Proovedor del producto" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -243,7 +243,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="price"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Price</FormLabel>
+                        <FormLabel>Precio</FormLabel>
                         <FormControl>
                         <Input type="number" disabled={loading} placeholder="$1000" {...field} />
                         </FormControl>
@@ -256,9 +256,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="quantity"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Quantity</FormLabel>
+                        <FormLabel>Cantidad</FormLabel>
                         <FormControl>
-                        <Input type="number" disabled={loading} placeholder="how many products " {...field} />
+                        <Input type="number" disabled={loading} placeholder="Cuantos productos" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -269,7 +269,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="categoryId"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Category</FormLabel>
+                        <FormLabel>Categoria</FormLabel>
                         <Select
                             disabled={loading}
                             onValueChange={field.onChange}
@@ -280,7 +280,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                 <SelectTrigger>
                                     <SelectValue
                                         defaultValue={field.value}
-                                        placeholder="Select a category"
+                                        placeholder="Selecciona una categoria"
                                     />
                                 </SelectTrigger>
                             </FormControl>
@@ -304,7 +304,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                     name="sizeId"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Size</FormLabel>
+                        <FormLabel>Tamaño</FormLabel>
                         <Select
                             disabled={loading}
                             onValueChange={field.onChange}
@@ -315,7 +315,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                 <SelectTrigger>
                                     <SelectValue
                                         defaultValue={field.value}
-                                        placeholder="Select a size"
+                                        placeholder="Selecciona un tamaño"
                                     />
                                 </SelectTrigger>
                             </FormControl>
@@ -392,10 +392,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                         </FormControl>
                         <div className="space-y-1 leading-none">
                             <FormLabel>
-                                Featured
+                                Destacado
                             </FormLabel>
                             <FormDescription>
-                                This product will appear on the home page
+                                Este producto se mostrará en la página de inicio
                             </FormDescription>
                         </div>
                     </FormItem>
@@ -424,10 +424,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                         </FormControl>
                         <div className="space-y-1 leading-none">
                             <FormLabel>
-                                Archived
+                                Archivado
                             </FormLabel>
                             <FormDescription>
-                                This product will not appear anywhere in the store
+                                Este producto no se mostrará en la tienda
                             </FormDescription>
                         </div>
                     </FormItem>
