@@ -61,10 +61,10 @@ export const ColorForm: React.FC<ColorFormProps> = ({
     const [loading, setLoading] = useState(false);
 
 
-    const title = initialData ? "Edit Color" : "Create Color";
-    const description = initialData ? "Edit a Color" : "Add new Color";
-    const toastMessage = initialData ? "Color updated" : "Color created.";
-    const action = initialData ? "Save changes" : "Create";
+    const title = initialData ? "Editar Color" : "Crear Color";
+    const description = initialData ? "Editar Color" : "Añadir nuevo Color";
+    const toastMessage = initialData ? "Color Actualizado" : "Color Creado.";
+    const action = initialData ? "Guardar cambios" : "crear";
 
 
     const form = useForm<ColorFormValues>({
@@ -102,7 +102,7 @@ export const ColorForm: React.FC<ColorFormProps> = ({
 
     catch (error: any) {
 
-        toast.error('Something went wrong.');
+        toast.error('Algo salió mal.');
 
     } finally {
 
@@ -125,13 +125,13 @@ export const ColorForm: React.FC<ColorFormProps> = ({
 
         router.push(`/${params.storeId}/colors`);
 
-        toast.success('Color deleted.');
+        toast.success('Color eliminado.');
 
     } 
 
     catch (error: any) {
 
-        toast.error('Make sure you removed all products using this Color first.');
+        toast.error('Asegúrate de que no haya productos usando este color.');
 
     } finally {
 
@@ -176,9 +176,9 @@ export const ColorForm: React.FC<ColorFormProps> = ({
                     name="name"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>Nombre</FormLabel>
                         <FormControl>
-                        <Input disabled={loading} placeholder="Color name" {...field} />
+                        <Input disabled={loading} placeholder="Nombre del color" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -189,19 +189,19 @@ export const ColorForm: React.FC<ColorFormProps> = ({
                     name="value"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Value</FormLabel>
+                        <FormLabel>Valor</FormLabel>
                         <FormControl>
                             <div className="flex items-center gap-x-4">
-                                <Input disabled={loading} placeholder="Color value" {...field} />
+                                <Input disabled={loading} placeholder="Valor del color" {...field} />
                                 <div
                                     className="border p-4 rounded-full"
                                     style={{backgroundColor: field.value}}
-                                    title="xd"
+                                    title="Vista previa del color"
                                 />
                             </div>
                         </FormControl>
                         <FormMessage />
-                        <FormLabel>use this to copy the hex code</FormLabel>
+                        <FormLabel className="text-center">Usa esto para seleccionar tu color</FormLabel>
                         <ColorPicker height={320} color={color} onChange={setColor} hideInput={["rgb", "hsv"]}/>
                     </FormItem>
                     )}

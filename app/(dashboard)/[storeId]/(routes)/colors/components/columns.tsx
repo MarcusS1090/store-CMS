@@ -28,7 +28,7 @@ export const columns: ColumnDef<ColorColumn>[] = [
                     variant= "ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Name
+                    Nombre
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -36,7 +36,7 @@ export const columns: ColumnDef<ColorColumn>[] = [
     },
     {
         accessorKey: "value",
-        header: "Value",
+        header: "Valor",
         cell: ({ row }) => (
             <div className="flex items-center gap-x-2">
                 {row.original.value}
@@ -47,7 +47,7 @@ export const columns: ColumnDef<ColorColumn>[] = [
     },
     {
         accessorKey: "createdAt",
-        header: "Date",
+        header: "Fecha",
     },
 
     {
