@@ -1,4 +1,5 @@
-import { UserButton, auth } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs/server"
+import { UserButton } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
 
@@ -15,7 +16,7 @@ import { ThemeToggle } from "./theme-toggle";
 export const Navbar = async () => {
     /* The line `const { userId } = auth();` is using destructuring assignment to extract the `userId`
     property from the object returned by the `auth()` function. */
-    const { userId } = auth();
+    const { userId } = await auth();
 
     /* The code `if (!userId) { redirect("/sign-in"); }` is checking if the `userId` variable is falsy
     (null, undefined, false, 0, etc.). If it is falsy, it means that the user is not authenticated

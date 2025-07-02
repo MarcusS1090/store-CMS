@@ -1,11 +1,14 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-/* The code is exporting a default middleware function called `authMiddleware` from the `@clerk/nextjs`
-package. This middleware is used to protect routes and enforce authentication. */
-export default authMiddleware({
-    publicRoutes: ["/api/:path*", "/fe6c08d4-79bd-461c-a995-4395c9a31242"],
-});
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/forum(.*)'])
+
+export default clerkMiddleware(async (auth, req) => {
+    if (isProtectedRoute(req)) await auth.protect()
+})
 
 export const config = {
-    matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
-};
+    matcher: [
+        '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+        '/(api|trpc)(.*)',
+    ],
+}

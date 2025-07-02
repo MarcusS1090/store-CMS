@@ -12,8 +12,8 @@ import { ThemeProvider } from '@/providers/theme-provider'
 const inter = Inter({ subsets: ['latin'] });
 
 export const Metadata = {
-  title: 'Panel de administración',
-  description: 'Panel de administración para la tienda',
+  title: 'NebulaCMS',
+  description: 'Mas que un CMS, una plataforma de comercio electrónico',
 };
 
 export default function RootLayout({
