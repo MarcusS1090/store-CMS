@@ -11,11 +11,12 @@ import { BillboardColumn } from "./components/columns";
  * Inside the div, there is another div element with the class name "flex-1 space-y-4 p-8 pt-6". Inside
  * this div, the BillboardClient component is being rendered.
  */
-const BillboardsPage = async({
-    params
-}: {
-    params : {storeId: string}
-}) => {
+const BillboardsPage = async (
+    props: {
+        params : Promise<{storeId: string}>
+    }
+) => {
+    const params = await props.params;
     /* The code is using the `prismadb` library to query the database for billboards. It is calling the
     `findMany` method on the `billboard` object, which retrieves multiple billboard records from the
     database. The `where` clause specifies that the billboards should have a `storeId` matching the

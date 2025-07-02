@@ -2,12 +2,8 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
-export async function POST( 
-
-    req:Request,
-    { params}: { params : {productId: string}}
-
-    ) {
+export async function POST(req:Request, props: { params : Promise<{productId: string}>}) {
+    const params = await props.params;
     try {
         const product = await prismadb.product.findUnique({
             where: {
@@ -41,11 +37,8 @@ export async function POST(
         return new NextResponse("Internal error", { status: 500 });
     }
 }
-export async function GET (
-
-    req:Request,
-    { params}: { params : {productId: string}}
-) {
+export async function GET(req:Request, props: { params : Promise<{productId: string}>}) {
+    const params = await props.params;
 
     try {
 
@@ -76,10 +69,10 @@ export async function GET (
 };
 
 export async function PATCH(
-
     req:Request,
-    { params}: { params : {storeId: string, productId: string}}
+    props: { params : Promise<{storeId: string, productId: string}>}
 ) {
+    const params = await props.params;
 
     try {
 
@@ -197,11 +190,11 @@ export async function PATCH(
     }
 };
 
-export async function DELETE (
-
+export async function DELETE(
     req:Request,
-    { params}: { params : {productId: string, storeId: string}},
+    props: { params : Promise<{productId: string, storeId: string}>}
 ) {
+    const params = await props.params;
 
     try {
 

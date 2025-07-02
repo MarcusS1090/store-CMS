@@ -11,13 +11,14 @@ import prismadb from "@/lib/prismadb";
  * @param  - - `req`: The request object containing information about the incoming request.
  * @returns The code is returning a JSON response containing the billboard object.
  */
-export async function GET (
+export async function GET(
     /* The `req:Request` parameter is defining the type of the `req` object, which is the incoming
     request object that contains information about the HTTP request being made. It specifies that
     `req` should be of type `Request`. */
     req:Request,
-    { params}: { params : {billboardId: string}}
+    props: { params : Promise<{billboardId: string}>}
 ) {
+    const params = await props.params;
     /* The code block you provided is a try-catch statement that handles the logic for retrieving a
     billboard object based on the provided billboardId parameter. */
     try {
@@ -64,8 +65,9 @@ export async function PATCH(
     /* The code `req:Request, { params}: { params : {storeId: string, billboardId: string}}` is
     defining the parameters for the function. */
     req:Request,
-    { params}: { params : {storeId: string, billboardId: string}}
+    props: { params : Promise<{storeId: string, billboardId: string}>}
 ) {
+    const params = await props.params;
     /* The code block you provided is a `try` block that handles the logic for updating a billboard's
     label and image URL in a store. Here's a breakdown of what the code is doing: */
     try {
@@ -148,12 +150,13 @@ export async function PATCH(
  * function. It could return a response with a status code and message, or it could return a JSON
  * object containing the deleted billboard data.
  */
-export async function DELETE (
+export async function DELETE(
     /* The code `req:Request, { params}: { params : {billboardId: string, storeId: string}}` is
     defining the parameters for the function. */
     req:Request,
-    { params}: { params : {billboardId: string, storeId: string}},
+    props: { params : Promise<{billboardId: string, storeId: string}>}
 ) {
+    const params = await props.params;
     /* The code block you provided is a `try` block that handles the logic for deleting a billboard.
     Here's a breakdown of what the code is doing: */
     try {

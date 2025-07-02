@@ -4,10 +4,8 @@ import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
 
 
-export async function GET (
-    req:Request,
-    { params}: { params : {categoryId: string}}
-) {
+export async function GET(req:Request, props: { params : Promise<{categoryId: string}>}) {
+    const params = await props.params;
 
     try {
 
@@ -38,8 +36,9 @@ export async function PATCH(
     /* The code `req:Request, { params}: { params : {storeId: string, billboardId: string}}` is
     defining the parameters for the function. */
     req:Request,
-    { params}: { params : {storeId: string, categoryId: string}}
+    props: { params : Promise<{storeId: string, categoryId: string}>}
 ) {
+    const params = await props.params;
     /* The code block you provided is a `try` block that handles the logic for updating a billboard's
     label and image URL in a store. Here's a breakdown of what the code is doing: */
     try {
@@ -111,10 +110,11 @@ export async function PATCH(
 };
 
 
-export async function DELETE (
+export async function DELETE(
     req:Request,
-    { params}: { params : {categoryId: string, storeId: string}},
+    props: { params : Promise<{categoryId: string, storeId: string}>}
 ) {
+    const params = await props.params;
 
     try {
 

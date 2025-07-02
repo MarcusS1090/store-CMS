@@ -7,11 +7,12 @@ import { OrderColumn } from "./components/columns";
 import { formatter } from "@/lib/utils";
 
 
-const OrdersPage = async({
-    params
-}: {
-    params : {storeId: string}
-}) => {
+const OrdersPage = async (
+    props: {
+        params : Promise<{storeId: string}>
+    }
+) => {
+    const params = await props.params;
 
     const orders = await prismadb.order.findMany({
         where: {

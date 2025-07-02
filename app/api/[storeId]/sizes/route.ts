@@ -6,11 +6,8 @@ import prismadb from "@/lib/prismadb";
 
 
 
-export async function POST(
-
-    req:Request,
-    { params }: { params: { storeId: string} }
-) {
+export async function POST(req:Request, props: { params: Promise<{ storeId: string}> }) {
+    const params = await props.params;
 
     try {
 
@@ -68,11 +65,8 @@ export async function POST(
 }
 
 
-export async function GET(
-
-    req:Request,
-    { params }: { params: { storeId: string} }
-) {
+export async function GET(req:Request, props: { params: Promise<{ storeId: string}> }) {
+    const params = await props.params;
 
     try {
 

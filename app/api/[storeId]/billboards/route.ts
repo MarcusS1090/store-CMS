@@ -20,8 +20,9 @@ export async function POST(
     /* `req: Request` is defining the `req` parameter as an object of type `Request`. This is the
     incoming request object, which contains information about the HTTP request being made. */
     req:Request,
-    { params }: { params: { storeId: string} }
+    props: { params: Promise<{ storeId: string}> }
 ) {
+    const params = await props.params;
     /* The code block you provided is a `try` block that handles the logic for creating a new billboard
     in the database. Here's a breakdown of what it does: */
     try {
@@ -103,8 +104,9 @@ export async function GET(
     `Request`. This is the incoming request object, which contains information about the HTTP request
     being made. */
     req:Request,
-    { params }: { params: { storeId: string} }
+    props: { params: Promise<{ storeId: string}> }
 ) {
+    const params = await props.params;
     /* The code block you provided is a `try` block that handles the logic for retrieving billboards
     from a database based on a store ID and returning them as a JSON response. */
     try {
