@@ -11,7 +11,7 @@ import { ThemeProvider } from '@/providers/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const Metadata = {
+export const metadata = {
   title: 'NebulaCMS',
   description: 'Mas que un CMS, una plataforma de comercio electrónico',
 };
@@ -32,17 +32,12 @@ export default function RootLayout({
           socialButtonsPlacement: "bottom",
           socialButtonsVariant: "iconButton",
           logoPlacement: "inside",
-          termsPageUrl: 'https://clerk.com/terms',
         },
       }}
     >
       <html lang="es" suppressHydrationWarning>
         <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-          >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ToasterProvider />
             <ModalProvider />
             {children}

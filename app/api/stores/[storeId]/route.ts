@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
@@ -11,7 +11,7 @@ export async function PATCH(
 
     try {
 
-        const {userId} = auth();
+        const {userId} = await auth();
 
         const body = await req.json();
 
@@ -43,7 +43,7 @@ export async function PATCH(
 
     } 
     catch (error) {
-        console.log('[STORE_PATCH]',error);
+        //console.log('[STORE_PATCH]',error);
         return new NextResponse("Internal error", { status: 500 });
     }
 };
@@ -54,7 +54,7 @@ export async function DELETE (
 ) {
     try {
 
-        const {userId} = auth();
+        const {userId} = await auth();
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 });
@@ -62,6 +62,25 @@ export async function DELETE (
 
         if (!params.storeId) {
             return new NextResponse("Store is required", { status: 400 });
+        }
+
+        const products = await prismadb.product.findMany({
+            where: {
+                storeId: params.storeId
+            }
+        });
+
+        const categories = await prismadb.category.findMany({
+            where: {
+                storeId: params.storeId
+            }
+        });
+
+        if (products.length > 0 || categories.length > 0) {
+            return new NextResponse("Asegúrese de eliminar todos los productos y categorías antes de eliminar la tienda.",
+                { status: 400 }
+            );
+            
         }
 
         const store = await prismadb.store.deleteMany({
@@ -75,7 +94,7 @@ export async function DELETE (
 
 
     } catch (error) {
-        console.log('[STORE_DELETE]',error);
+        //console.log('[STORE_DELETE]',error);
         return new NextResponse("Internal error", { status: 500 });
     }
 };

@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import prismadb from "@/lib/prismadb";
@@ -15,7 +15,7 @@ const SettingPage: React.FC<SettingPageProps>  = async ({ params }) => {
     The `auth()` function is likely a function provided by a library (such as Clerk) that returns
     information about the currently authenticated user. By destructuring `userId` from the result of
     `auth()`, we can access the user's ID directly as a variable. */
-    const { userId } = auth();
+    const { userId } = await auth();
 
     /* The code `if (!userId) { redirect("/sign-in"); }` is checking if the `userId` variable is falsy
     (i.e., `null`, `undefined`, `false`, `0`, `NaN`, or an empty string). If `userId` is falsy, it
