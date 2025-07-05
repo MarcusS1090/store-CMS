@@ -1,4 +1,5 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import cloudinary from "@/lib/cloudinary";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
@@ -73,7 +74,7 @@ export async function PATCH(
     try {
         /* The line `const {userId} = auth();` is using destructuring assignment to extract the
         `userId` property from the result of the `auth()` function. */
-        const {userId} = auth();
+        const {userId} = await auth();
 
         /* The line `const body = await req.json();` is parsing the JSON data from the request body. */
         const body = await req.json();
@@ -112,12 +113,20 @@ export async function PATCH(
             return new NextResponse("Unauthorized", {status: 403})
         }
 
-        /* The code `const billboard = await prismadb.billboard.update({ ... })` is updating a
-        billboard object in the database. */
-        const billboard = await prismadb.billboard.updateMany({
+        const existingBillboard = await prismadb.billboard.findUnique({
+            where: { id: params.billboardId },
+        });
+
+        if (existingBillboard && existingBillboard.imageUrl && existingBillboard.imageUrl !== imageUrl) {
+            const publicId = existingBillboard.imageUrl.split('/').pop()?.split('.')[0];
+            if (publicId) {
+                await cloudinary.uploader.destroy(publicId);
+            }
+        }
+
+        const billboard = await prismadb.billboard.update({
             where: {
                 id: params.billboardId,
-                
             },
             data: {
                 label,
@@ -162,7 +171,7 @@ export async function DELETE(
     try {
         /* The line `const {userId} = auth();` is using destructuring assignment to extract the
         `userId` property from the result of the `auth()` function. */
-        const {userId} = auth();
+        const {userId} = await auth();
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 });
@@ -186,10 +195,18 @@ export async function DELETE(
             return new NextResponse("Unauthorized", {status: 403})
         }
 
-        /* The code `const billboard = await prismadb.billboard.deleteMany({ where: { id:
-        params.billboardId } });` is deleting a billboard object from the database based on the
-        provided `billboardId` parameter. */
-        const billboard = await prismadb.billboard.deleteMany({
+        const existingBillboard = await prismadb.billboard.findUnique({
+            where: { id: params.billboardId },
+        });
+
+        if (existingBillboard && existingBillboard.imageUrl) {
+            const publicId = existingBillboard.imageUrl.split('/').pop()?.split('.')[0];
+            if (publicId) {
+                await cloudinary.uploader.destroy(publicId);
+            }
+        }
+
+        const billboard = await prismadb.billboard.delete({
             where: {
                 id: params.billboardId,
             }

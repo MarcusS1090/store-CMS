@@ -80,10 +80,10 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 
     /* These lines of code are defining variables that are used to determine the text and behavior of
     the form based on whether the `initialData` prop is provided or not. */
-    const title = initialData ? "Edita tu cartelera" : "Crea una cartelera";
-    const description = initialData ? "Edita tu cartelera" : "Añade una nueva cartelera";
-    const toastMessage = initialData ? "Cartelera actualizada" : "Cartelera creada.";
-    const action = initialData ? "Guardar cambios" : "Crear.";
+    const title = initialData ? "Edita tu Banner" : "Crea un Banner";
+    const description = initialData ? "Edita tu Banner" : "Añade un nuevo Banner";
+    const toastMessage = initialData ? "Banner actualizado" : "Banner creado";
+    const action = initialData ? "Guardar cambios" : "Crear Banner";
 
     /* The code `const form = useForm<BillboardFormValues>({ resolver: zodResolver(formSchema),
     defaultValues: initialData || { label: '', imageUrl: '' } });` is initializing a form using the
@@ -184,7 +184,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         represented by `'/'`. */
         router.push(`/${params.storeId}/billboards`);
 
-        toast.success('Cartelera eliminada.');
+        toast.success('Banner eliminado.');
 
     } 
     /* The above code is a catch block in a TypeScript React application. It is catching any error
@@ -192,7 +192,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
     message being displayed is "Make sure you removed all categories using this billboard." */
     catch (error: any) {
 
-        toast.error('Asegúrate de haber eliminado todas las categorías que usan esta cartelera.');
+        toast.error('Asegúrate de haber eliminado todas las categorías que usan este Banner.');
 
     } finally {
 
@@ -236,7 +236,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                     name="imageUrl"
                     render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Imagen de fondo</FormLabel>
+                        <FormLabel>Imagen para el banner</FormLabel>
                         <FormControl>
                         <ImageUpload 
                             value={field.value ? [field.value] : []}
@@ -258,7 +258,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
                     <FormItem>
                         <FormLabel>Etiqueta</FormLabel>
                         <FormControl>
-                        <Input disabled={loading} placeholder="Etiqueta de la cartelera" {...field} />
+                        <Input disabled={loading} placeholder="Etiqueta del Banner" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>

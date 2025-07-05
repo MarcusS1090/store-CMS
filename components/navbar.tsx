@@ -47,7 +47,18 @@ export const Navbar = async () => {
                 <MainNav className="mx-6" />
                 <div className="ml-auto flex items-center space-x-4">
                     <ThemeToggle />
-                    <UserButton afterSignOutUrl="/" />
+                    <UserButton 
+
+                        appearance={{
+                            elements: {
+                                userButtonAvatarBox: "h-8 w-8",
+                                userButtonAvatarImage: "h-8 w-8 rounded-full",
+                            },
+                        }
+                        }
+                        afterSignOutUrl="/"
+                        userProfileUrl="/profile"
+                    />
                 </div>
             </div>
         </div>

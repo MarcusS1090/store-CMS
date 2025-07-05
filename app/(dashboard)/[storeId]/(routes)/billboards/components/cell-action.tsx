@@ -57,7 +57,7 @@ export const CellAction: React.FC<CellActionProps>  = ( {
      */
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success('cartelera ID copiada al portapapeles.');
+        toast.success('Banner ID copiada al portapapeles.');
     }
 
     const onDelete = async () => {
@@ -82,7 +82,7 @@ export const CellAction: React.FC<CellActionProps>  = ( {
             router.refresh();
 
     
-            toast.success('Cartelera eliminada.');
+            toast.success('Banner eliminado.');
     
         } 
         /* The above code is a catch block in a TypeScript React application. It is catching any error
@@ -90,7 +90,7 @@ export const CellAction: React.FC<CellActionProps>  = ( {
         message being displayed is "Make sure you removed all categories using this billboard." */
         catch (error: any) {
     
-            toast.error('Asegúrate de haber eliminado todas las categorias que usan esta cartelera.');
+            toast.error('Asegúrate de haber eliminado todas las categorias que usan esta Banner.');
     
         } finally {
     
