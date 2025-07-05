@@ -1,5 +1,5 @@
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
@@ -9,7 +9,7 @@ export async function POST(
 ) {
 
     try {
-        const { userId } = auth();
+        const { userId } = await auth();
         const body = await req.json();
         
         const { name } = body;
