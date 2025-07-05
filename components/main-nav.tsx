@@ -39,7 +39,7 @@ export function MainNav({
         },
         {
             href:`/${params.storeId}/billboards`,
-            label: "Carteles",
+            label: "Banners",
             active: pathname === `/${params.storeId}/billboards`,
         },
         {

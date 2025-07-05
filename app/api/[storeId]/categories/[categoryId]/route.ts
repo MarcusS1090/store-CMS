@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
@@ -44,7 +44,7 @@ export async function PATCH(
     try {
         /* The line `const {userId} = auth();` is using destructuring assignment to extract the
         `userId` property from the result of the `auth()` function. */
-        const {userId} = auth();
+        const {userId} = await auth();
 
         /* The line `const body = await req.json();` is parsing the JSON data from the request body. */
         const body = await req.json();
@@ -118,7 +118,7 @@ export async function DELETE(
 
     try {
 
-        const {userId} = auth();
+        const {userId} = await auth();
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 });
