@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
@@ -38,7 +38,7 @@ export async function PATCH(req:Request, props: { params : Promise<{storeId: str
 
     try {
 
-        const {userId} = auth();
+        const {userId} = await auth();
 
 
         const body = await req.json();
@@ -100,7 +100,7 @@ export async function DELETE(req:Request, props: { params : Promise<{sizeId: str
 
     try {
 
-        const {userId} = auth();
+        const {userId} = await auth();
 
         if (!userId) {
             return new NextResponse("Unauthenticated", { status: 401 });
